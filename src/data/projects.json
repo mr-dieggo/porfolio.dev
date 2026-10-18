@@ -60,23 +60,23 @@
     "description": "Experimento satírico que simula un servicio para descargar RAM: bilingüe español/inglés, tema claro y oscuro, carrusel accesible con teclado y una barra de descarga totalmente falsa.",
     "link": "https://cloudram.netlify.app/",
     "github": "https://github.com/mr-dieggo/descargarRAM",
-    "image": "/projects/cloud-ram.svg",
     "tags": [
       "ASTRO",
       "TYPESCRIPT"
-    ]
+    ],
+    "experiment": true
   },
   {
     "title": "Departure Time - Cuentas regresivas",
     "description": "Experimento en colaboración: cuentas regresivas para fechas, horas del día o días del mes, con notificaciones del navegador, tema claro y oscuro, e importación y exportación en JSON.",
     "link": "https://departuretime.vercel.app/",
     "github": "https://github.com/mr-dieggo/departure-time",
-    "image": "/projects/departure-time.svg",
     "tags": [
       "REACT",
       "TYPESCRIPT",
       "VITE",
       "TAILWIND"
-    ]
+    ],
+    "experiment": true
   }
 ]
