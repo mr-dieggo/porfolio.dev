@@ -1,17 +1,82 @@
 [
   {
-    "title": "SVGL - A beautiful library with SVG logos",
-    "description": "Biblioteca de logos SVG de las marcas más populares. +10k visitas al mes. +2K svgs descargados. Creado desde cero con Next.js, React y Tailwind CSS.",
-    "link": "https://svgl.vercel.app/",
-    "github": "https://github.com/pheralb/svgl",
-    "image": "/projects/svgl.webp",
-    "tags": ["NEXT", "TAILWIND"]
+    "title": "Pide Sano - Delivery solo de comida saludable",
+    "description": "Startup que cofundé junto a un socio (Pide Sano SpA): un marketplace de delivery donde solo se vende comida saludable, con lanzamiento en Osorno. Monorepo con una API en Go, apps móviles en Expo para comercios, repartidores y clientes, una consola de operaciones en Next.js e infraestructura en Google Cloud definida con Terraform.",
+    "image": "/projects/pide-sano.svg",
+    "tags": [
+      "GO",
+      "EXPO",
+      "NEXT",
+      "POSTGRESQL",
+      "GOOGLECLOUD"
+    ],
+    "note": "Cofundador · en desarrollo · repositorio privado"
   },
   {
-    "title": "AdventJS - Retos de programación con JavaScript y TypeScript",
-    "description": "Plataforma gratuita con retos de programación. Más de 1 millón de visitas en un mes. +50K retos completados. Creada desde cero con Next.js, React y Tailwind CSS.",
-    "link": "https://adventjs.dev",
-    "image": "/projects/adventjs.webp",
-    "tags": ["NEXT", "TAILWIND"]
+    "title": "PICIR - Plataforma de ciberseguridad para redes internas",
+    "description": "Mi proyecto de título: una aplicación de escritorio para analizar y proteger redes internas. Descubre los equipos conectados, escanea sus puertos y servicios con Nmap y permite administrarlos de forma remota por SSH.",
+    "github": "https://github.com/mr-dieggo/PICIR",
+    "image": "/projects/picir.svg",
+    "tags": [
+      "PYTHON",
+      "QT"
+    ]
+  },
+  {
+    "title": "Transcriptor multimedia con IA local",
+    "description": "Aplicación de escritorio, desarrollada en equipo para el Juzgado de Familia de Osorno, que transcribe audio y video con whisper.cpp. La inferencia corre en CPU, así que funciona en equipos de bajos recursos y el audio de las causas nunca sale del computador.",
+    "github": "https://github.com/donmcontreras/Whisper-Transcriptor",
+    "image": "/projects/transcriptor.svg",
+    "tags": [
+      "PYTHON"
+    ]
+  },
+  {
+    "title": "Inventario PJUD - Gestor de inventario web",
+    "description": "Gestor de inventario full-stack para el Juzgado de Familia de Osorno. Lo puse en producción y lo entregué con un manual de usuario para que el personal administrativo lo operara de forma autónoma.",
+    "image": "/projects/inventario-pjud.svg",
+    "tags": [
+      "NEXT",
+      "TYPESCRIPT",
+      "TAILWIND",
+      "MYSQL"
+    ],
+    "note": "Repositorio privado"
+  },
+  {
+    "title": "Mi Taller - Gestión para un taller automotriz",
+    "description": "Aplicación full-stack, hecha en un equipo de siete personas, para un taller de desabolladura y pintura: agenda de trabajos en calendario, inicio de sesión con JWT, gráficos y reportes en PDF.",
+    "github": "https://github.com/katiaarevalo/mi-taller-app",
+    "image": "/projects/mi-taller.svg",
+    "tags": [
+      "REACT",
+      "NODE",
+      "EXPRESS",
+      "MYSQL"
+    ]
+  },
+  {
+    "title": "Cloud RAM - Descarga RAM desde la nube",
+    "description": "Experimento satírico que simula un servicio para descargar RAM: bilingüe español/inglés, tema claro y oscuro, carrusel accesible con teclado y una barra de descarga totalmente falsa.",
+    "link": "https://cloudram.netlify.app/",
+    "github": "https://github.com/mr-dieggo/descargarRAM",
+    "image": "/projects/cloud-ram.svg",
+    "tags": [
+      "ASTRO",
+      "TYPESCRIPT"
+    ]
+  },
+  {
+    "title": "Departure Time - Cuentas regresivas",
+    "description": "Experimento en colaboración: cuentas regresivas para fechas, horas del día o días del mes, con notificaciones del navegador, tema claro y oscuro, e importación y exportación en JSON.",
+    "link": "https://departuretime.vercel.app/",
+    "github": "https://github.com/mr-dieggo/departure-time",
+    "image": "/projects/departure-time.svg",
+    "tags": [
+      "REACT",
+      "TYPESCRIPT",
+      "VITE",
+      "TAILWIND"
+    ]
   }
 ]

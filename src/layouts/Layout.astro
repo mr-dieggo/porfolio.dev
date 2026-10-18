@@ -18,23 +18,24 @@ const {
   canonical = Astro.url.href,
 } = Astro.props;
 
-const siteUrl = "https://porfolio.dev";
+const siteUrl = "https://mrdieggo.dev";
 const ogImage = new URL(image, siteUrl).toString();
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Miguel Ángel Durán",
+  name: "Diego Gabriel Molina Rodríguez",
+  alternateName: "mr-dieggo",
   url: siteUrl,
   sameAs: [
-    "https://linkedin.com/in/midudev",
-    "https://github.com/midudev",
-    "https://twitter.com/midudev",
+    "https://linkedin.com/in/diego-molinar",
+    "https://github.com/mr-dieggo",
   ],
-  jobTitle: "Ingeniero de Software y Creador de Contenido",
-  worksFor: {
-    "@type": "Organization",
-    name: "Freelance",
+  jobTitle: "Ingeniero Civil en Informática",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Osorno",
+    addressCountry: "CL",
   },
 };
 ---
@@ -45,7 +46,7 @@ const jsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="author" content="Miguel Ángel Durán" />
+    <meta name="author" content="Diego Molina Rodríguez" />
     <meta name="generator" content={Astro.generator} />
 
     <!-- Canonical -->
@@ -59,13 +60,11 @@ const jsonLd = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="es_ES" />
-    <meta property="og:site_name" content="midudev · Porfolio" />
+    <meta property="og:locale" content="es_CL" />
+    <meta property="og:site_name" content="Diego Molina · Porfolio" />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@midudev" />
-    <meta name="twitter:creator" content="@midudev" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />

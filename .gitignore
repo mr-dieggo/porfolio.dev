@@ -23,3 +23,10 @@ bun.*
 
 package-lock.json
 pnpm-lock.yaml
+# AI agent skills (autoskills)
+.agents/
+.claude/
+skills-lock.json
+
+# Fuente LaTeX del CV (contiene datos personales en comentarios)
+cv/
