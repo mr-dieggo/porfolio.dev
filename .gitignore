@@ -33,3 +33,6 @@ cv/
 
 # wrangler
 .wrangler/
+
+# Impeccable (critique snapshots, live server)
+.impeccable/

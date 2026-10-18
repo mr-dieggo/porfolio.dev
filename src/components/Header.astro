@@ -34,8 +34,8 @@ const navItems = [
     {
       navItems.map((link) => (
         <a
-          class="nav-link relative text-xs sm:text-sm block px-1.5 sm:px-3 py-2 sm:py-1.5 rounded-full transition-colors duration-200 hover:text-yellow-500 dark:hover:text-yellow-400"
-          aria-label={link.label}
+          class="nav-link relative text-xs sm:text-sm block px-1.5 sm:px-3 py-2 sm:py-1.5 rounded-full transition-colors duration-200 hover:text-amber-700 dark:hover:text-yellow-400"
+          data-section-link={link.label}
           href={link.url}
         >
           {link.title}
@@ -57,11 +57,11 @@ const navItems = [
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           navItems.forEach((item) => {
-            if (item.getAttribute("aria-label") == entry.target.id) {
-              item.classList.add("text-yellow-500", "dark:text-yellow-400", "bg-yellow-400/10")
+            if (item.getAttribute("data-section-link") == entry.target.id) {
+              item.classList.add("text-amber-700", "dark:text-yellow-400", "bg-yellow-400/10")
               item.classList.remove("text-gray-600", "dark:text-gray-300")
             } else {
-              item.classList.remove("text-yellow-500", "dark:text-yellow-400", "bg-yellow-400/10")
+              item.classList.remove("text-amber-700", "dark:text-yellow-400", "bg-yellow-400/10")
               item.classList.add("text-gray-600", "dark:text-gray-300")
             }
           })
@@ -69,10 +69,12 @@ const navItems = [
       })
     }
 
+    // A thin band near the middle of the viewport, so sections taller than the
+    // screen still become active (a ratio threshold never fires for them).
     const observer = new IntersectionObserver(callback, {
       root: null,
-      rootMargin: "0px",
-      threshold: 0.3,
+      rootMargin: "-40% 0px -55% 0px",
+      threshold: 0,
     })
 
     sections.forEach((section) => {
@@ -102,7 +104,7 @@ const navItems = [
     @apply dark:bg-gray-900/80 bg-white/60;
   }
 
-  .nav-link.text-yellow-500 {
+  .nav-link.text-amber-700 {
     @apply font-semibold;
   }
 

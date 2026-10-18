@@ -3,14 +3,21 @@ import SunIcon from "./icons/Sun.astro"
 import MoonIcon from "./icons/Moon.astro"
 import SystemIcon from "./icons/System.astro"
 
-const THEMES = ["Light", "Dark", "System"]
+const THEMES = [
+  { value: "light", label: "Claro" },
+  { value: "dark", label: "Oscuro" },
+  { value: "system", label: "Sistema" },
+]
 ---
 
 <div class="relative ml-1 mr-1">
   <button
     transition:persist
     id="theme-toggle-btn"
-    class="appearance-none border-none flex hover:scale-125 transition"
+    type="button"
+    aria-expanded="false"
+    aria-controls="themes-menu"
+    class="appearance-none border-none flex p-1.5 -m-1.5 rounded-full hover:scale-125 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
   >
     <span class="sr-only">Elige el tema</span>
     <SunIcon id="light" class="theme-toggle-icon size-5 transition-all" />
@@ -30,9 +37,16 @@ const THEMES = ["Light", "Dark", "System"]
   >
     <ul>
       {
-        THEMES.map((theme) => (
-          <li class="themes-menu-option px-2 py-1.5 cursor-default hover:bg-neutral-400/40 dark:hover:bg-gray-500/50 rounded-sm">
-            {theme}
+        THEMES.map(({ value, label }) => (
+          <li>
+            <button
+              type="button"
+              data-theme={value}
+              aria-pressed="false"
+              class="themes-menu-option w-full text-left px-2 py-1.5 rounded-sm hover:bg-neutral-400/40 dark:hover:bg-gray-500/50 aria-pressed:font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
+            >
+              {label}
+            </button>
           </li>
         ))
       }
@@ -83,6 +97,14 @@ const THEMES = ["Light", "Dark", "System"]
     document.querySelectorAll<HTMLElement>(".theme-toggle-icon").forEach((element) => {
       element.style.scale = element.id === themePreference ? "1" : "0"
     })
+    document.querySelectorAll<HTMLButtonElement>(".themes-menu-option").forEach((option) => {
+      option.setAttribute("aria-pressed", String(option.dataset.theme === themePreference))
+    })
+  }
+
+  const setMenuOpen = (open: boolean): void => {
+    themesMenu.classList.toggle("open", open)
+    document.getElementById("theme-toggle-btn")?.setAttribute("aria-expanded", String(open))
   }
 
   const updateTheme = (): void => {
@@ -112,20 +134,27 @@ const THEMES = ["Light", "Dark", "System"]
     abortController = new AbortController()
     const { signal } = abortController
 
-    document.addEventListener("click", () => themesMenu.classList.remove("open"), { signal })
+    document.addEventListener("click", () => setMenuOpen(false), { signal })
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && themesMenu.classList.contains("open")) {
+        setMenuOpen(false)
+        document.getElementById("theme-toggle-btn")?.focus()
+      }
+    }, { signal })
 
     document.getElementById("theme-toggle-btn")?.addEventListener("click", (e) => {
       e.stopPropagation()
-      const isClosed = !themesMenu.classList.contains("open")
-      themesMenu.classList.toggle("open", isClosed)
+      setMenuOpen(!themesMenu.classList.contains("open"))
     }, { signal })
 
-    document.querySelectorAll<HTMLLIElement>(".themes-menu-option").forEach((element) => {
-      element.addEventListener("click", (e) => {
-        const target = e.target as HTMLElement
-        const theme = target.innerText.toLowerCase().trim() as ThemePreference
+    document.querySelectorAll<HTMLButtonElement>(".themes-menu-option").forEach((element) => {
+      element.addEventListener("click", () => {
+        const theme = element.dataset.theme as ThemePreference
         localStorage.setItem(THEME_STORAGE_KEY, theme)
         updateTheme()
+        // The menu closes on this click; keep keyboard focus on the toggle
+        document.getElementById("theme-toggle-btn")?.focus()
       }, { signal })
     })
   }

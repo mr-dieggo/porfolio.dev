@@ -1,7 +1,7 @@
 [
   {
     "title": "Pide Sano - Delivery solo de comida saludable",
-    "description": "Startup que cofundé junto a un socio (Pide Sano SpA): un marketplace de delivery donde solo se vende comida saludable, con lanzamiento en Osorno. Monorepo con una API en Go, apps móviles en Expo para comercios, repartidores y clientes, una consola de operaciones en Next.js e infraestructura en Google Cloud definida con Terraform.",
+    "description": "Marketplace de delivery donde solo se vende comida saludable, con lanzamiento en Osorno. Monorepo con una API en Go, apps en Expo para comercios, repartidores y clientes, una consola de operaciones en Next.js e infraestructura en Google Cloud con Terraform.",
     "image": "/projects/pide-sano.svg",
     "tags": [
       "GO",

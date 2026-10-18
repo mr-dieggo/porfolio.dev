@@ -11,6 +11,9 @@ importers:
       '@astrojs/check':
         specifier: 0.5.6
         version: 0.5.6(prettier@3.8.1)(typescript@5.3.3)
+      '@astrojs/sitemap':
+        specifier: 3.2.1
+        version: 3.2.1
       '@astrojs/tailwind':
         specifier: 5.1.0
         version: 5.1.0(astro@4.4.5(typescript@5.3.3))(tailwindcss@3.4.1)
@@ -66,6 +69,9 @@ packages:
   '@astrojs/prism@3.3.0':
     resolution: {integrity: sha512-q8VwfU/fDZNoDOf+r7jUnMC2//H2l0TuQ6FkGJL8vD8nw/q5KiL3DS1KKBI3QhI9UQhpJ5dc7AtqfbXWuOgLCQ==}
     engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0}
+
+  '@astrojs/sitemap@3.2.1':
+    resolution: {integrity: sha512-uxMfO8f7pALq0ADL6Lk68UV6dNYjJ2xGUzyjjVj60JLBs5a6smtlkBYv3tQ0DzoqwS7c9n4FUx5lgv0yPo/fgA==}
 
   '@astrojs/tailwind@5.1.0':
     resolution: {integrity: sha512-BJoCDKuWhU9FT2qYg+fr6Nfb3qP4ShtyjXGHKA/4mHN94z7BGcmauQK23iy+YH5qWvTnhqkd6mQPQ1yTZTe9Ig==}
@@ -665,6 +671,12 @@ packages:
 
   '@types/nlcst@1.0.4':
     resolution: {integrity: sha512-ABoYdNQ/kBSsLvZAekMhIPMQ3YUZvavStpKYs7BjLLuKVmIMA0LUgZ7b54zzuWJRbHF80v1cNf4r90Vd6eMQDg==}
+
+  '@types/node@17.0.45':
+    resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
+
+  '@types/sax@1.2.7':
+    resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
 
   '@types/unist@2.0.11':
     resolution: {integrity: sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==}
@@ -1874,6 +1886,10 @@ packages:
   safe-buffer@5.2.1:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
 
+  sax@1.6.1:
+    resolution: {integrity: sha512-42tBVwLWnaQvW5zc4HbZrTuWccECCZfBi92FDuwtqxasH+JbPB3/FOKb1m222K42R4WxuxzzMsTswfzgtSu64Q==}
+    engines: {node: '>=11.0.0'}
+
   section-matter@1.0.0:
     resolution: {integrity: sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==}
     engines: {node: '>=4'}
@@ -1926,6 +1942,11 @@ packages:
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
 
+  sitemap@8.0.3:
+    resolution: {integrity: sha512-9Ew1tR2WYw8RGE2XLy7GjkusvYXy8Rg6y8TYuBuQMfIEdGcWoJpY2Wr5DzsEiL/TKCw56+YKTCCUHglorEYK+A==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    hasBin: true
+
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -1939,6 +1960,9 @@ packages:
   stdin-discarder@0.1.0:
     resolution: {integrity: sha512-xhV7w8S+bUwlPTb4bAOUQhv8/cSS5offJuX8GQGq32ONF0ZtDWKfkdomM3HMRA+LhX6um/FZ0COqlwsjD53LeQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+
+  stream-replace-string@2.0.0:
+    resolution: {integrity: sha512-TlnjJ1C0QrmxRNrON00JvaFFlNh5TTG00APw23j74ET7gkQpTASi6/L2fuiav8pzK715HXtUeClpBTw2NPSn6w==}
 
   streamx@2.23.0:
     resolution: {integrity: sha512-kn+e44esVfn2Fa/O0CPFcex27fjIL6MkVae0Mm6q+E6f0hWv578YCERbv+4m02cjxvDsPKLnmxral/rR6lBMAg==}
@@ -2417,6 +2441,12 @@ snapshots:
     dependencies:
       prismjs: 1.30.0
 
+  '@astrojs/sitemap@3.2.1':
+    dependencies:
+      sitemap: 8.0.3
+      stream-replace-string: 2.0.0
+      zod: 3.25.76
+
   '@astrojs/tailwind@5.1.0(astro@4.4.5(typescript@5.3.3))(tailwindcss@3.4.1)':
     dependencies:
       astro: 4.4.5(typescript@5.3.3)
@@ -2876,6 +2906,12 @@ snapshots:
   '@types/nlcst@1.0.4':
     dependencies:
       '@types/unist': 2.0.11
+
+  '@types/node@17.0.45': {}
+
+  '@types/sax@1.2.7':
+    dependencies:
+      '@types/node': 17.0.45
 
   '@types/unist@2.0.11': {}
 
@@ -4432,6 +4468,8 @@ snapshots:
 
   safe-buffer@5.2.1: {}
 
+  sax@1.6.1: {}
+
   section-matter@1.0.0:
     dependencies:
       extend-shallow: 2.0.1
@@ -4490,6 +4528,13 @@ snapshots:
 
   sisteransi@1.0.5: {}
 
+  sitemap@8.0.3:
+    dependencies:
+      '@types/node': 17.0.45
+      '@types/sax': 1.2.7
+      arg: 5.0.2
+      sax: 1.6.1
+
   source-map-js@1.2.1: {}
 
   space-separated-tokens@2.0.2: {}
@@ -4499,6 +4544,8 @@ snapshots:
   stdin-discarder@0.1.0:
     dependencies:
       bl: 5.1.0
+
+  stream-replace-string@2.0.0: {}
 
   streamx@2.23.0:
     dependencies:
