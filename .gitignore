@@ -30,3 +30,6 @@ skills-lock.json
 
 # Fuente LaTeX del CV (contiene datos personales en comentarios)
 cv/
+
+# wrangler
+.wrangler/
