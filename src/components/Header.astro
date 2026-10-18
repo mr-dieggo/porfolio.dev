@@ -20,7 +20,7 @@ const navItems = [
   {
     title: "Contacto",
     label: "contacto",
-    url: "mailto:mrx.dieggo@gmail.com",
+    url: "/#contacto",
   },
 ]
 ---
@@ -53,19 +53,32 @@ const navItems = [
     const sections = document.querySelectorAll("section")
     const navItems = document.querySelectorAll("header nav a")
 
-    const callback = (entries: any[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navItems.forEach((item) => {
-            if (item.getAttribute("data-section-link") == entry.target.id) {
-              item.classList.add("text-amber-700", "dark:text-yellow-400", "bg-yellow-400/10")
-              item.classList.remove("text-gray-600", "dark:text-gray-300")
-            } else {
-              item.classList.remove("text-amber-700", "dark:text-yellow-400", "bg-yellow-400/10")
-              item.classList.add("text-gray-600", "dark:text-gray-300")
-            }
-          })
+    const lastSection = sections[sections.length - 1]
+
+    const setActive = (id: string) => {
+      navItems.forEach((item) => {
+        if (item.getAttribute("data-section-link") == id) {
+          item.classList.add("text-amber-700", "dark:text-yellow-400", "bg-yellow-400/10")
+          item.classList.remove("text-gray-600", "dark:text-gray-300")
+        } else {
+          item.classList.remove("text-amber-700", "dark:text-yellow-400", "bg-yellow-400/10")
+          item.classList.add("text-gray-600", "dark:text-gray-300")
         }
+      })
+    }
+
+    // The last section is too short to reach the middle band, so it wins
+    // whenever the page is scrolled to the bottom
+    const isAtBottom = () =>
+      window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
+
+    const callback = (entries: IntersectionObserverEntry[]) => {
+      if (isAtBottom() && lastSection) {
+        setActive(lastSection.id)
+        return
+      }
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setActive(entry.target.id)
       })
     }
 
@@ -80,6 +93,14 @@ const navItems = [
     sections.forEach((section) => {
       observer.observe(section)
     })
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (isAtBottom() && lastSection) setActive(lastSection.id)
+      },
+      { passive: true },
+    )
 
     document.onvisibilitychange = () => {
       if (document.visibilityState === "hidden") {

@@ -1,0 +1,86 @@
+---
+import SocialPill from "@/components/SocialPill.astro"
+import DownloadIcon from "@/components/icons/Download.astro"
+import LinkedInIcon from "@/components/icons/LinkedIn.astro"
+
+const email = "mrx.dieggo@gmail.com"
+---
+
+<div class="max-w-xl text-gray-700 dark:text-gray-300">
+  <p class="text-xl text-pretty">
+    ¿Tienes un puesto o un proyecto en mente? Escríbeme y conversemos.
+  </p>
+
+  <div class="flex flex-wrap items-center gap-x-4 gap-y-3 mt-6">
+    <a
+      id="contact-email"
+      href={`mailto:${email}`}
+      class="font-mono text-lg sm:text-xl text-gray-900 dark:text-white underline underline-offset-4 decoration-amber-700/40 hover:decoration-amber-700 dark:decoration-yellow-400/40 dark:hover:decoration-yellow-400 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
+    >
+      {email}
+    </a>
+    <button
+      type="button"
+      id="copy-email"
+      data-email={email}
+      class="inline-flex items-center px-3 py-1 text-sm transition border rounded-full text-gray-800 bg-gray-100 border-gray-300 hover:bg-gray-900 hover:border-gray-700 hover:text-white dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:hover:bg-gray-100 dark:hover:border-gray-300 dark:hover:text-black focus:outline-none focus-visible:ring focus-visible:ring-yellow-500/80 focus-visible:ring-offset-2"
+    >
+      Copiar correo
+    </button>
+    <span
+      id="copy-email-status"
+      role="status"
+      class="text-sm text-emerald-700 dark:text-emerald-300"
+    ></span>
+  </div>
+
+  <nav class="flex flex-wrap gap-4 mt-8" aria-label="Otras formas de contacto">
+    <SocialPill href="https://linkedin.com/in/diego-molinar">
+      <LinkedInIcon class="size-4" />
+      LinkedIn
+    </SocialPill>
+    <SocialPill href="/CV-Diego-Molina.pdf">
+      <DownloadIcon class="size-4" />
+      Currículum
+    </SocialPill>
+  </nav>
+</div>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const button = document.getElementById("copy-email") as HTMLButtonElement | null
+    const status = document.getElementById("copy-email-status")
+    if (!button || !status) return
+
+    let resetTimer: number | undefined
+
+    const selectEmail = () => {
+      const link = document.getElementById("contact-email")
+      const selection = window.getSelection()
+      if (!link || !selection) return
+      const range = document.createRange()
+      range.selectNodeContents(link)
+      selection.removeAllRanges()
+      selection.addRange(range)
+    }
+
+    button.addEventListener("click", async () => {
+      const email = button.dataset.email ?? ""
+      try {
+        // writeText can stay pending if the browser withholds permission
+        await Promise.race([
+          navigator.clipboard.writeText(email),
+          new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 2000)),
+        ])
+        status.textContent = "Correo copiado"
+      } catch {
+        selectEmail()
+        status.textContent = "No se pudo copiar: el correo quedó seleccionado para que lo copies"
+      }
+      window.clearTimeout(resetTimer)
+      resetTimer = window.setTimeout(() => {
+        status.textContent = ""
+      }, 4000)
+    })
+  })
+</script>

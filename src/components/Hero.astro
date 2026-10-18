@@ -21,6 +21,8 @@ import SocialPill from "@/components/SocialPill.astro"
       <img
         class="relative rounded-full shadow-2xl size-20 ring-2 ring-yellow-400/60 ring-offset-2 ring-offset-gray-50 dark:ring-offset-gray-950"
         src="/avatar.webp"
+        width="80"
+        height="80"
         alt={personalImageAlt}
       />
     </div>
@@ -42,11 +44,15 @@ import SocialPill from "@/components/SocialPill.astro"
     herramientas de <strong>ciberseguridad</strong>.
   </p>
 
+  <p class="anim-fade-in anim-delay-2 mt-3 text-lg text-gray-700 dark:text-gray-400 text-pretty">
+    Busco roles en gestión de TI, desarrollo de software o ciberseguridad.
+  </p>
+
   <nav
     class="anim-fade-in anim-delay-3 flex flex-wrap gap-4 mt-8"
     aria-label="Redes sociales y contacto"
   >
-    <SocialPill href="mailto:mrx.dieggo@gmail.com">
+    <SocialPill href="#contacto" primary>
       <MailIcon class="size-4" />
       Contáctame
     </SocialPill>

@@ -81,6 +81,22 @@ const jsonLd = {
       set:html={JSON.stringify(jsonLd)}
     />
 
+    <!-- Apply the saved theme before first paint, so there is no light flash -->
+    <script is:inline>
+      (() => {
+        let stored = null
+        try {
+          stored = localStorage.getItem("theme")
+        } catch {}
+        const pref = stored === "light" || stored === "dark" ? stored : "system"
+        const dark =
+          pref === "dark" ||
+          (pref === "system" && matchMedia("(prefers-color-scheme: dark)").matches)
+        document.documentElement.classList.toggle("dark", dark)
+        document.documentElement.dataset.themePref = pref
+      })()
+    </script>
+
     <link rel="preload" href={onestLatin} as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
@@ -108,6 +124,16 @@ const jsonLd = {
     <style is:global>
       :root {
         color-scheme: light dark;
+      }
+
+      /* Theme icons: show only the saved preference until the toggle script runs */
+      .theme-toggle-icon {
+        scale: 0;
+      }
+      html[data-theme-pref="light"] #light,
+      html[data-theme-pref="dark"] #dark,
+      html[data-theme-pref="system"] #system {
+        scale: 1;
       }
 
       ::selection {

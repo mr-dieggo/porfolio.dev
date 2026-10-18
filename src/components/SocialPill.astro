@@ -1,14 +1,19 @@
 ---
-const { href } = Astro.props
-// mailto links open the mail client, not a new tab
-const opensNewTab = !String(href).startsWith("mailto:")
+const { href, primary = false, ...rest } = Astro.props
+// External sites and the CV open in a new tab; in-page anchors and mailto do not
+const opensNewTab = /^https?:\/\//.test(String(href)) || String(href).endsWith(".pdf")
+
+const variant = primary
+  ? "font-medium text-white bg-amber-700 border-amber-700 hover:bg-amber-800 hover:border-amber-800 dark:text-gray-950 dark:bg-yellow-400 dark:border-yellow-400 dark:hover:bg-yellow-300 dark:hover:border-yellow-300"
+  : "text-gray-800 bg-gray-100 border-gray-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white hover:bg-gray-900 hover:border-gray-700 hover:text-white dark:hover:bg-gray-100 dark:hover:border-gray-300 dark:hover:text-black"
 ---
 
 <a
-  {...Astro.props}
+  {...rest}
+  href={href}
   target={opensNewTab ? "_blank" : undefined}
   rel={opensNewTab ? "noopener noreferrer" : undefined}
-  class="inline-flex items-center justify-center gap-2 px-4 py-1 text-gray-800 transition bg-gray-100 border border-gray-300 rounded-full dark:bg-gray-800 dark:border-gray-600 dark:text-white focus-visible:ring-yellow-500/80 text-md hover:bg-gray-900 hover:border-gray-700 hover:text-white dark:hover:bg-gray-100 dark:hover:border-gray-300 dark:hover:text-black group max-w-fit focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-white focus-visible:ring-offset-2 active:bg-black"
+  class={`inline-flex items-center justify-center gap-2 px-4 py-1 transition border rounded-full focus-visible:ring-yellow-500/80 text-md group max-w-fit focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-offset-2 ${variant}`}
 >
   <slot />
 </a>
