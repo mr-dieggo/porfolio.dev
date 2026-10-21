@@ -17,7 +17,11 @@ import Vite from "./icons/Vite.astro"
 import GoogleCloud from "./icons/GoogleCloud.astro"
 import ExternalLink from "./icons/ExternalLink.astro"
 import LinkButton from "./LinkButton.astro"
-import projectsData from "@/data/projects.json"
+import { projects, type ProjectEntry } from "@/data/projects"
+import { getLang, useTranslations } from "@/i18n/utils"
+
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
 
 const TAGS: Record<string, { name: string; class: string; icon: any }> = {
   NEXT: {
@@ -97,8 +101,12 @@ const TAGS: Record<string, { name: string; class: string; icon: any }> = {
   },
 }
 
-const PROJECTS = projectsData.map((project) => ({
+const PROJECTS = (projects as ProjectEntry[]).map((project) => ({
   ...project,
+  title: project.title[lang],
+  description: project.description[lang],
+  note: project.note?.[lang],
+  image: project.image?.[lang],
   tags: project.tags.map((key) => TAGS[key]),
 }))
 
@@ -155,21 +163,23 @@ const EXPERIMENTS = PROJECTS.filter((project) => project.experiment)
       type="button"
       aria-controls={`project-desc-${index}`}
       aria-expanded="false"
+      data-more={t("projects.readMore")}
+      data-less={t("projects.readLess")}
       class="project-desc-toggle hidden self-start mt-1 text-sm font-medium text-amber-700 dark:text-yellow-200 hover:underline underline-offset-4 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
     >
-      Leer más
+      {t("projects.readMore")}
     </button>
     <footer class="flex flex-wrap items-center mt-4 gap-x-4 gap-y-2">
       {github && (
         <LinkButton href={github}>
           <GitHub class="size-5" />
-          Código
+          {t("projects.code")}
         </LinkButton>
       )}
       {link && (
         <LinkButton href={link}>
           <ExternalLink class="size-4" />
-          Ver demo
+          {t("projects.demo")}
         </LinkButton>
       )}
       {note && (
@@ -185,7 +195,7 @@ const EXPERIMENTS = PROJECTS.filter((project) => project.experiment)
 {
   EXPERIMENTS.length > 0 && (
     <div class="mt-16">
-      <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">Experimentos</h3>
+      <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">{t("projects.experiments")}</h3>
       <ul class="mt-2 divide-y divide-gray-200 dark:divide-white/10">
         {EXPERIMENTS.map(({ title, description, tags, link, github }) => (
           <li class="flex flex-col gap-3 py-5 md:flex-row md:items-center md:justify-between md:gap-8">
@@ -200,13 +210,13 @@ const EXPERIMENTS = PROJECTS.filter((project) => project.experiment)
               {github && (
                 <LinkButton href={github}>
                   <GitHub class="size-5" />
-                  Código
+                  {t("projects.code")}
                 </LinkButton>
               )}
               {link && (
                 <LinkButton href={link}>
                   <ExternalLink class="size-4" />
-                  Ver demo
+                  {t("projects.demo")}
                 </LinkButton>
               )}
             </div>
@@ -218,7 +228,7 @@ const EXPERIMENTS = PROJECTS.filter((project) => project.experiment)
 }
 
 <script>
-  // On phones, long descriptions start at three lines with a "Leer más"
+  // On phones, long descriptions start at three lines with a "read more"
   // toggle. Without JS (or on wider screens) the full text stays visible.
   document.addEventListener("astro:page-load", () => {
     if (!window.matchMedia("(max-width: 767px)").matches) return
@@ -237,7 +247,7 @@ const EXPERIMENTS = PROJECTS.filter((project) => project.experiment)
       toggle.addEventListener("click", () => {
         const expanded = desc.classList.toggle("line-clamp-3") === false
         toggle.setAttribute("aria-expanded", String(expanded))
-        toggle.textContent = expanded ? "Leer menos" : "Leer más"
+        toggle.textContent = (expanded ? toggle.dataset.less : toggle.dataset.more) ?? ""
       })
     })
   })

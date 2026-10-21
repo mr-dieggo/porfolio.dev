@@ -1,5 +1,4 @@
 ---
-const personalImageAlt = "Diego Molina"
 import Badge from "@/components/Badge.astro"
 import DownloadIcon from "@/components/icons/Download.astro"
 import GitHubIcon from "@/components/icons/GitHub.astro"
@@ -7,6 +6,10 @@ import LinkedInIcon from "@/components/icons/LinkedIn.astro"
 import MailIcon from "@/components/icons/Mail.astro"
 import FlagChile from "@/components/icons/FlagChile.astro"
 import SocialPill from "@/components/SocialPill.astro"
+import { getLang, rich, useTranslations } from "@/i18n/utils"
+
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
 ---
 
 <div class="max-w-xl">
@@ -23,38 +26,37 @@ import SocialPill from "@/components/SocialPill.astro"
         src="/avatar.webp"
         width="80"
         height="80"
-        alt={personalImageAlt}
+        alt={t("hero.avatarAlt")}
       />
     </div>
-    <Badge>Disponible para trabajar</Badge>
+    <Badge>{t("hero.available")}</Badge>
   </div>
 
   <h1
     class="anim-fade-in anim-delay-1 text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white"
   >
-    Hola, soy <span class="gradient-name">Diego Molina</span>
+    {t("hero.greeting")} <span class="gradient-name">Diego Molina</span>
   </h1>
 
   <p
     class="anim-fade-in anim-delay-2 mt-6 text-xl text-gray-800 dark:[&>strong]:text-yellow-200 [&>strong]:text-amber-700 [&>strong]:font-semibold dark:text-gray-300"
   >
-    <strong>Ingeniero Civil en Informática</strong> de Osorno, Chile
+    <strong>{t("hero.role")}</strong> {t("hero.from")}
     <FlagChile class="inline-block h-[0.75em] w-auto -translate-y-px rounded-[2px] ring-1 ring-black/10" aria-hidden="true" />.
-    Desarrollo software full-stack, aplicaciones de escritorio con IA local y
-    herramientas de <strong>ciberseguridad</strong>.
+    <Fragment set:html={rich(t("hero.summary"))} />
   </p>
 
   <p class="anim-fade-in anim-delay-2 mt-3 text-lg text-gray-700 dark:text-gray-400 text-pretty">
-    Busco roles en gestión de TI, desarrollo de software o ciberseguridad.
+    {t("hero.seeking")}
   </p>
 
   <nav
     class="anim-fade-in anim-delay-3 flex flex-wrap gap-4 mt-8"
-    aria-label="Redes sociales y contacto"
+    aria-label={t("hero.linksLabel")}
   >
     <SocialPill href="#contacto" primary>
       <MailIcon class="size-4" />
-      Contáctame
+      {t("hero.contact")}
     </SocialPill>
     <SocialPill href="https://linkedin.com/in/diego-molinar">
       <LinkedInIcon class="size-4" />
@@ -64,9 +66,9 @@ import SocialPill from "@/components/SocialPill.astro"
       <GitHubIcon class="size-4" />
       GitHub
     </SocialPill>
-    <SocialPill href="/CV-Diego-Molina.pdf">
+    <SocialPill href={t("cv.href")} type="application/pdf" hreflang={lang}>
       <DownloadIcon class="size-4" />
-      Currículum
+      {t("cv.label")}
     </SocialPill>
   </nav>
 </div>

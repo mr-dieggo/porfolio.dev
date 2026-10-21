@@ -1,13 +1,24 @@
 ---
 import ExperienceItem from "./ExperienceItem.astro"
-import experience from "@/data/experience.json"
+import { experience } from "@/data/experience"
+import { getLang, useTranslations } from "@/i18n/utils"
+
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
 ---
 
-<ol class="relative mt-16" aria-label="Experiencia laboral">
+<ol class="relative mt-16" aria-label={t("experience.title")}>
   {
     experience.map((exp, i) => (
       <li class="anim-fade-in" style={`animation-delay: ${i * 150}ms`}>
-        <ExperienceItem {...exp} />
+        <ExperienceItem
+          date={exp.date[lang]}
+          title={exp.title[lang]}
+          company={exp.company[lang]}
+          description={exp.description[lang]}
+          link={"link" in exp ? exp.link : undefined}
+          current={"current" in exp ? exp.current : false}
+        />
       </li>
     ))
   }

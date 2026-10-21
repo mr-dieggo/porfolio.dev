@@ -1,34 +1,5 @@
 ---
-import Layout from "@/layouts/Layout.astro"
-import SectionContainer from "@/components/SectionContainer.astro"
-import ArrowRight from "@/components/icons/ArrowRight.astro"
+import NotFound from "@/components/NotFound.astro"
 ---
 
-<Layout
-  title="Página no encontrada · Diego Molina"
-  description="Esta dirección no existe en el porfolio de Diego Molina."
-  noindex
->
-  <main class="px-4 flex-1">
-    <SectionContainer class="py-32 md:py-44">
-      <div class="max-w-xl">
-        <h1
-          class="text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white text-balance"
-        >
-          Esta página no existe
-        </h1>
-        <p class="mt-6 text-xl text-gray-800 dark:text-gray-300 text-pretty">
-          Puede que el enlace esté mal escrito o que la página se haya movido.
-          Todo lo que hay en el porfolio está en la página de inicio.
-        </p>
-        <a
-          href="/"
-          class="inline-flex items-center gap-2 px-4 py-2 mt-8 text-gray-800 transition bg-gray-100 border border-gray-300 rounded-full dark:bg-gray-800 dark:border-gray-600 dark:text-white hover:bg-gray-900 hover:border-gray-700 hover:text-white dark:hover:bg-gray-100 dark:hover:border-gray-300 dark:hover:text-black focus:outline-none focus-visible:ring focus-visible:ring-yellow-500/80 focus-visible:ring-offset-2"
-        >
-          Volver al inicio
-          <ArrowRight class="size-4" aria-hidden="true" />
-        </a>
-      </div>
-    </SectionContainer>
-  </main>
-</Layout>
+<NotFound />

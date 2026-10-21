@@ -2,24 +2,28 @@
 import SunIcon from "./icons/Sun.astro"
 import MoonIcon from "./icons/Moon.astro"
 import SystemIcon from "./icons/System.astro"
+import { getLang, useTranslations } from "@/i18n/utils"
+
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
 
 const THEMES = [
-  { value: "light", label: "Claro" },
-  { value: "dark", label: "Oscuro" },
-  { value: "system", label: "Sistema" },
+  { value: "light", label: t("theme.light") },
+  { value: "dark", label: t("theme.dark") },
+  { value: "system", label: t("theme.system") },
 ]
 ---
 
 <div class="relative ml-1 mr-1">
   <button
-    transition:persist
+    transition:persist={`theme-btn-${lang}`}
     id="theme-toggle-btn"
     type="button"
     aria-expanded="false"
     aria-controls="themes-menu"
     class="appearance-none border-none flex p-1.5 -m-1.5 rounded-full hover:scale-125 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
   >
-    <span class="sr-only">Elige el tema</span>
+    <span class="sr-only">{t("theme.choose")}</span>
     <SunIcon id="light" class="theme-toggle-icon size-5 transition-all" />
     <MoonIcon
       id="dark"
@@ -31,7 +35,7 @@ const THEMES = [
     />
   </button>
   <div
-    transition:persist
+    transition:persist={`theme-menu-${lang}`}
     id="themes-menu"
     class="absolute hidden scale-80 top-8 right-0 text-sm p-1 min-w-[8rem] rounded-md border border-gray-100 bg-white/90 dark:bg-gray-900/90 dark:border-gray-500/20 shadow-[0_3px_10px_rgb(0,0,0,0.2)] backdrop-blur-md"
   >

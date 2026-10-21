@@ -1,40 +1,30 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro"
+import LanguageSwitch from "./LanguageSwitch.astro"
+import { sections } from "@/data/sections"
+import { getLang, localeHome, useTranslations } from "@/i18n/utils"
 
-const navItems = [
-  {
-    title: "Experiencia",
-    label: "experiencia",
-    url: "/#experiencia",
-  },
-  {
-    title: "Proyectos",
-    label: "proyectos",
-    url: "/#proyectos",
-  },
-  {
-    title: "Sobre mí",
-    label: "sobre-mi",
-    url: "/#sobre-mi",
-  },
-  {
-    title: "Contacto",
-    label: "contacto",
-    url: "/#contacto",
-  },
-]
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
+const home = localeHome(lang)
+
+const navItems = sections.map(({ id, nav }) => ({
+  title: t(nav),
+  label: id,
+  url: `${home}#${id}`,
+}))
 ---
 
 <header
   class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-4"
 >
   <nav
-    class="header-nav flex gap-x-1 px-4 py-1.5 text-sm font-medium rounded-full text-gray-600 dark:text-gray-300 justify-center items-center border border-transparent"
+    class="header-nav flex gap-x-0 min-[400px]:gap-x-0.5 sm:gap-x-1 px-1.5 sm:px-4 py-1.5 text-sm font-medium rounded-full text-gray-600 dark:text-gray-300 justify-center items-center border border-transparent"
   >
     {
       navItems.map((link) => (
         <a
-          class="nav-link relative text-xs sm:text-sm block px-1.5 sm:px-3 py-2 sm:py-1.5 rounded-full transition-colors duration-200 hover:text-amber-700 dark:hover:text-yellow-400"
+          class={`nav-link relative whitespace-nowrap text-xs sm:text-sm block px-1 min-[400px]:px-1.5 sm:px-3 py-2 sm:py-1.5 rounded-full transition-colors duration-200 hover:text-amber-700 dark:hover:text-yellow-400 ${link.label === "sobre-mi" ? "max-[469px]:hidden" : ""}`}
           data-section-link={link.label}
           href={link.url}
         >
@@ -42,7 +32,8 @@ const navItems = [
         </a>
       ))
     }
-    <div class="ml-2 pl-2 border-l border-gray-300/30 dark:border-white/10">
+    <div class="flex items-center gap-0.5 min-[400px]:gap-1 ml-0.5 pl-1 min-[400px]:ml-1 min-[400px]:pl-1.5 sm:ml-2 sm:pl-2 border-l border-gray-300/30 dark:border-white/10">
+      <LanguageSwitch />
       <ThemeToggle />
     </div>
   </nav>
@@ -51,11 +42,17 @@ const navItems = [
 <script>
   document.addEventListener("astro:page-load", () => {
     const sections = document.querySelectorAll("section")
-    const navItems = document.querySelectorAll("header nav a")
+    const navItems = document.querySelectorAll("header nav a[data-section-link]")
+    const langSwitch = document.querySelector<HTMLAnchorElement>("[data-lang-switch]")
 
     const lastSection = sections[sections.length - 1]
 
     const setActive = (id: string) => {
+      // Keep the language switch pointing at the section being read
+      if (langSwitch) {
+        const base = langSwitch.dataset.base ?? "/"
+        langSwitch.href = id ? `${base}#${id}` : base
+      }
       navItems.forEach((item) => {
         if (item.getAttribute("data-section-link") == id) {
           item.classList.add("text-amber-700", "dark:text-yellow-400", "bg-yellow-400/10")

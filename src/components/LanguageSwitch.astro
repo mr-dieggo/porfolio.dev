@@ -1,0 +1,27 @@
+---
+import { languages } from "@/i18n/ui"
+import { getLang, localeHome, otherLang, useTranslations } from "@/i18n/utils"
+
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
+const target = otherLang(lang)
+const base = localeHome(target)
+---
+
+<!--
+  A full page load (data-astro-reload) so the browser jumps to the #section
+  natively and no persisted Spanish UI is carried onto the English page.
+  Header.astro keeps the href's #hash in sync with the active section.
+-->
+<a
+  data-lang-switch
+  data-base={base}
+  href={base}
+  hreflang={target}
+  lang={target}
+  title={t("lang.switch")}
+  data-astro-reload
+  class="relative block px-1.5 sm:px-2 py-2 sm:py-1.5 text-xs sm:text-sm font-semibold rounded-full transition-colors duration-200 hover:text-amber-700 dark:hover:text-yellow-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
+>
+  {target.toUpperCase()}<span class="sr-only"> · {languages[target]}</span>
+</a>

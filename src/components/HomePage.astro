@@ -1,0 +1,76 @@
+---
+import Layout from "@/layouts/Layout.astro"
+
+import AboutMe from "@/components/AboutMe.astro"
+import Contact from "@/components/Contact.astro"
+import Education from "@/components/Education.astro"
+import Experience from "@/components/Experience.astro"
+import Hero from "@/components/Hero.astro"
+import Projects from "@/components/Projects.astro"
+import SectionContainer from "@/components/SectionContainer.astro"
+import Services from "@/components/Services.astro"
+import TitleSection from "@/components/TitleSection.astro"
+import Briefcase from "@/components/icons/Briefcase.astro"
+import CodeDots from "@/components/icons/CodeDots.astro"
+import Mail from "@/components/icons/Mail.astro"
+import Tools from "@/components/icons/Tools.astro"
+import UserHeart from "@/components/icons/UserHeart.astro"
+import { getLang, useTranslations } from "@/i18n/utils"
+
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
+---
+
+<Layout
+  title={t("meta.title")}
+  description={t("meta.description")}
+  markdown={lang === "es" ? "/index.md" : "/en.md"}
+>
+  <main class="px-4">
+    <SectionContainer class="py-16 md:py-36">
+      <Hero />
+    </SectionContainer>
+    <div class="space-y-24">
+      <SectionContainer id="experiencia">
+        <TitleSection>
+          <Briefcase class="size-8" />
+          {t("experience.title")}
+        </TitleSection>
+        <Experience />
+      </SectionContainer>
+
+      <SectionContainer id="proyectos">
+        <TitleSection>
+          <CodeDots class="size-7" />
+          {t("projects.title")}
+        </TitleSection>
+        <Projects />
+      </SectionContainer>
+
+      <SectionContainer id="servicios">
+        <TitleSection>
+          <Tools class="size-8" />
+          {t("services.title")}
+        </TitleSection>
+        <Services />
+      </SectionContainer>
+
+      <SectionContainer id="sobre-mi">
+        <TitleSection>
+          <UserHeart class="size-8" />
+          {t("about.title")}
+        </TitleSection>
+        <AboutMe />
+        <Education />
+      </SectionContainer>
+
+      <SectionContainer id="contacto">
+        <TitleSection>
+          <Mail class="size-8" />
+          {t("contact.title")}
+        </TitleSection>
+        <Contact />
+      </SectionContainer>
+    </div>
+  </main>
+</Layout>

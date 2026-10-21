@@ -1,5 +1,8 @@
 ---
 import HeartFilled from "./icons/HeartFilled.astro"
+import { getLang, useTranslations } from "@/i18n/utils"
+
+const t = useTranslations(getLang(Astro.currentLocale))
 const currentYear = new Date().getFullYear()
 ---
 
@@ -12,8 +15,8 @@ const currentYear = new Date().getFullYear()
     <span class="text-sm text-center text-pretty md:text-left text-zinc-800/90 dark:text-zinc-200/90"
       >&copy; {currentYear}
       <a href="https://github.com/mr-dieggo/porfolio.dev" class="hover:underline">Diego Molina</a>.
-      Hecho con <HeartFilled class="size-3.5 text-red-500 inline" aria-hidden="true" /><span class="sr-only">cariño</span>
-      a partir de la plantilla de <a href="https://midu.dev/" class="hover:underline">midudev</a>.
+      {t("footer.madeWith")} <HeartFilled class="size-3.5 text-red-500 inline" aria-hidden="true" /><span class="sr-only">{t("footer.love")}</span>
+      {t("footer.template")} <a href="https://midu.dev/" class="hover:underline">midudev</a>.
     </span>
   </div>
 </footer>

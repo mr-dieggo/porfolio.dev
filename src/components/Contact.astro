@@ -2,13 +2,17 @@
 import SocialPill from "@/components/SocialPill.astro"
 import DownloadIcon from "@/components/icons/Download.astro"
 import LinkedInIcon from "@/components/icons/LinkedIn.astro"
+import { getLang, useTranslations } from "@/i18n/utils"
+
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
 
 const email = "mrx.dieggo@gmail.com"
 ---
 
 <div class="max-w-xl text-gray-700 dark:text-gray-300">
   <p class="text-xl text-pretty">
-    ¿Tienes un puesto o un proyecto en mente? Escríbeme y conversemos.
+    {t("contact.lead")}
   </p>
 
   <div class="flex flex-wrap items-center gap-x-4 gap-y-3 mt-6">
@@ -23,9 +27,11 @@ const email = "mrx.dieggo@gmail.com"
       type="button"
       id="copy-email"
       data-email={email}
+      data-copied={t("contact.copied")}
+      data-copy-failed={t("contact.copyFailed")}
       class="inline-flex items-center px-3 py-1 text-sm transition border rounded-full text-gray-800 bg-gray-100 border-gray-300 hover:bg-gray-900 hover:border-gray-700 hover:text-white dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:hover:bg-gray-100 dark:hover:border-gray-300 dark:hover:text-black focus:outline-none focus-visible:ring focus-visible:ring-yellow-500/80 focus-visible:ring-offset-2"
     >
-      Copiar correo
+      {t("contact.copy")}
     </button>
     <span
       id="copy-email-status"
@@ -34,14 +40,18 @@ const email = "mrx.dieggo@gmail.com"
     ></span>
   </div>
 
-  <nav class="flex flex-wrap gap-4 mt-8" aria-label="Otras formas de contacto">
+  <p class="mt-4 text-gray-600 dark:text-gray-400 text-pretty">
+    {t("contact.phone")}
+  </p>
+
+  <nav class="flex flex-wrap gap-4 mt-8" aria-label={t("contact.otherLabel")}>
     <SocialPill href="https://linkedin.com/in/diego-molinar">
       <LinkedInIcon class="size-4" />
       LinkedIn
     </SocialPill>
-    <SocialPill href="/CV-Diego-Molina.pdf">
+    <SocialPill href={t("cv.href")} type="application/pdf" hreflang={lang}>
       <DownloadIcon class="size-4" />
-      Currículum
+      {t("cv.label")}
     </SocialPill>
   </nav>
 </div>
@@ -72,10 +82,10 @@ const email = "mrx.dieggo@gmail.com"
           navigator.clipboard.writeText(email),
           new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 2000)),
         ])
-        status.textContent = "Correo copiado"
+        status.textContent = button.dataset.copied ?? ""
       } catch {
         selectEmail()
-        status.textContent = "No se pudo copiar: el correo quedó seleccionado para que lo copies"
+        status.textContent = button.dataset.copyFailed ?? ""
       }
       window.clearTimeout(resetTimer)
       resetTimer = window.setTimeout(() => {
