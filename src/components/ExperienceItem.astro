@@ -45,7 +45,8 @@ const t = useTranslations(getLang(Astro.currentLocale))
     {
       link && (
         <LinkInline href={link}>
-          {t("experience.learnMore")} {company}{" "}
+          {/* One expression: Astro drops the space between two adjacent ones here */}
+          {`${t("experience.learnMore")} ${company} `}
           <ArrowRight class="size-5" aria-hidden="true" />
         </LinkInline>
       )
