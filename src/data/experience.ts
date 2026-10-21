@@ -15,8 +15,8 @@ export const experience = [
     title: { es: "Cofundador y desarrollador", en: "Co-founder and developer" },
     company: { es: "Pide Sano SpA", en: "Pide Sano SpA" },
     description: {
-      es: "Cofundé la empresa junto a un socio y desarrollo la plataforma completa, desde la API hasta las apps y la infraestructura. La sociedad se constituyó en septiembre de 2026 y preparamos el lanzamiento en Osorno.",
-      en: "I co-founded the company with a partner and build the whole platform, from the API to the apps and the infrastructure. The company was incorporated in September 2026 and we're preparing the launch in Osorno.",
+      es: "Cofundé la empresa junto a un socio y desarrollo la plataforma completa: la API, las apps, la consola de operaciones, el sitio web público y la infraestructura. La sociedad se constituyó en septiembre de 2026 y preparamos el lanzamiento en Osorno.",
+      en: "I co-founded the company with a partner and build the whole platform: the API, the apps, the operations console, the public website and the infrastructure. The company was incorporated in September 2026 and we're preparing the launch in Osorno.",
     },
     current: true,
   },

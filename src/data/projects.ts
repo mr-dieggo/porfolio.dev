@@ -55,8 +55,8 @@ export const projects = [
       en: "Pide Sano - Healthy-only food delivery",
     },
     description: {
-      es: "Marketplace de delivery donde solo se vende comida saludable, con lanzamiento en Osorno. Monorepo con una API en Go, apps en Expo para comercios, repartidores y clientes, una consola de operaciones en Next.js e infraestructura en Google Cloud con Terraform.",
-      en: "Delivery marketplace that only sells healthy food, launching in Osorno. Monorepo with a Go API, Expo apps for merchants, couriers and customers, a Next.js operations console and Google Cloud infrastructure managed with Terraform.",
+      es: "Marketplace de delivery donde solo se vende comida saludable, con lanzamiento en Osorno. Monorepo con una API en Go, apps en Expo para comercios, repartidores y clientes, una consola de operaciones y un sitio web público indexable en Next.js, e infraestructura en Google Cloud con Terraform.",
+      en: "Delivery marketplace that only sells healthy food, launching in Osorno. Monorepo with a Go API, Expo apps for merchants, couriers and customers, a Next.js operations console and search-indexable public website, and Google Cloud infrastructure managed with Terraform.",
     },
     image: { es: "/projects/pide-sano.svg", en: "/projects/pide-sano.en.svg" },
     tags: ["GO", "EXPO", "NEXT", "POSTGRESQL", "GOOGLECLOUD"],
