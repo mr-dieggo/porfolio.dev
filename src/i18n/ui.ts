@@ -3,7 +3,7 @@ export type Lang = keyof typeof languages
 export const defaultLang: Lang = "es"
 
 const es = {
-  "meta.title": "Diego Molina - Ingeniero Civil en Informática y desarrollador full-stack",
+  "meta.title": "Diego Molina - Ingeniero Civil en Informática, full-stack",
   "meta.description":
     "Porfolio de Diego Molina, Ingeniero Civil en Informática de Osorno, Chile. Desarrollo full-stack, aplicaciones de escritorio con IA local, herramientas de ciberseguridad y servicios informáticos.",
   "meta.siteName": "Diego Molina · Porfolio",
