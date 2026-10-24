@@ -33,26 +33,36 @@ const siteUrl = "https://mrdieggo.dev";
 // JPG, not WebP: some link previews (LinkedIn among them) skip WebP images
 const ogImage = new URL(image ?? (lang === "en" ? "/og-en.jpg" : "/og.jpg"), siteUrl).toString();
 
+// ProfilePage: the whole site is about one person (Google's profile-page structured data)
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Diego Gabriel Molina Rodríguez",
-  alternateName: "mr-dieggo",
-  url: siteUrl,
-  sameAs: [
-    "https://linkedin.com/in/diego-molinar",
-    "https://github.com/mr-dieggo",
-  ],
-  jobTitle: t("meta.jobTitle"),
-  knowsLanguage: Object.keys(languages),
-  alumniOf: {
-    "@type": "CollegeOrUniversity",
-    name: "Universidad de Los Lagos",
-  },
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Osorno",
-    addressCountry: "CL",
+  "@type": "ProfilePage",
+  url: canonical,
+  inLanguage: lang,
+  dateModified: new Date().toISOString(),
+  mainEntity: {
+    "@type": "Person",
+    "@id": `${siteUrl}/#person`,
+    name: "Diego Gabriel Molina Rodríguez",
+    alternateName: "mr-dieggo",
+    url: siteUrl,
+    image: `${siteUrl}/avatar.webp`,
+    description: description,
+    sameAs: [
+      "https://linkedin.com/in/diego-molinar",
+      "https://github.com/mr-dieggo",
+    ],
+    jobTitle: t("meta.jobTitle"),
+    knowsLanguage: Object.keys(languages),
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "Universidad de Los Lagos",
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Osorno",
+      addressCountry: "CL",
+    },
   },
 };
 ---
@@ -98,12 +108,14 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- JSON-LD structured data -->
-    <script
-      is:inline
-      type="application/ld+json"
-      set:html={JSON.stringify(jsonLd)}
-    />
+    <!-- JSON-LD structured data (not on the noindex 404 pages) -->
+    {!noindex && (
+      <script
+        is:inline
+        type="application/ld+json"
+        set:html={JSON.stringify(jsonLd)}
+      />
+    )}
 
     <!-- Apply the saved theme before first paint, so there is no light flash -->
     <script is:inline>
@@ -122,7 +134,9 @@ const jsonLd = {
     </script>
 
     <link rel="preload" href={onestLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{title}</title>
     <meta name="darkreader-lock" />
     <ViewTransitions />
